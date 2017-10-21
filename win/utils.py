@@ -46,21 +46,21 @@ class ModEnv(object):
             os.environ[self.key] = self.orig_value            
 
 def rmtree(dir):
-    print "RMTREE", dir
+    print("RMTREE", dir)
     shutil.rmtree(dir, ignore_errors=True)
 
 def rm(fn, silent=False):
     if os.path.exists(fn):
         if not silent:
-            print "RM", fn
+            print("RM", fn)
         os.remove(fn)
 
 def makedirs(dir):
-    print "MAKEDIRS", dir
+    print("MAKEDIRS", dir)
     os.makedirs(dir)
 
 def cp(src, dest):
-    print "COPY %s %s" % (src, dest)
+    print("COPY %s %s" % (src, dest))
     shutil.copy2(src, dest)
 
 def wipetree(dir, wipe=True):
@@ -84,7 +84,7 @@ def wipetree(dir, wipe=True):
                 pass
 
     if wipe:
-        print "WIPETREE", dir
+        print("WIPETREE", dir)
         shutil.rmtree(dir, ignore_errors=False, onerror=onerror)
     if not os.path.isdir(dir):
         makedirs(dir)
@@ -163,7 +163,7 @@ def archsplit_filt(fn):
         return True
 
 def extract(fn, t):
-    print "%s EXTRACT %s [%s]" % ("ZIP" if t == "zip" else "TAR", fn, t)
+    print("%s EXTRACT %s [%s]" % ("ZIP" if t == "zip" else "TAR", fn, t))
 
     if t == "zip":
         with zipfile.ZipFile(fn) as z:
@@ -193,7 +193,7 @@ def expand(pkg_prefix, srcdir, lib_versions=None, noop=False):
     return b
 
 def call(cmd, **kw):
-    print "***", cmd
+    print("***", cmd)
 
     ignore_errors = extract_dict(kw, 'ignore_errors', False)
     extra_env = extract_dict(kw, 'extra_env', None)
@@ -207,7 +207,7 @@ def call(cmd, **kw):
     se = kw.get('env')
     if se:
         show_env(se)
-        print "***"
+        print("***")
 
     ret = subprocess.call(cmd, **kw)
     if not ignore_errors and ret != succeed:
@@ -235,7 +235,7 @@ def patchfile(pkg_prefix, patchdir):
 
 def patch(pkg_prefix, patchdir):
     patch_fn = patchfile(pkg_prefix, patchdir)
-    print "PATCH", patch_fn
+    print("PATCH", patch_fn)
     call(['patch', '-p1', '-i', patch_fn])
 
 def build_dir(parms):

@@ -13,7 +13,7 @@ def compile_one_file(parms, srcfile, incdirs):
     vc_cmd(parms, r"cl /c /DNOMINMAX /D_CRT_SECURE_NO_WARNINGS %(incdirs)s /EHsc %(link_static_dynamic_flags)s /W3 %(dbg_rel_flags)s /nologo %(srcfile)s" % extra, arch=os.environ.get("ARCH"))
 
 def build_asio(parms):
-    print "**************** ASIO"
+    print("**************** ASIO")
     with Cd(build_dir(parms)) as cd:
         with ModEnv('PATH', "%s\\bin;%s" % (parms.get('GIT'), os.environ['PATH'])):
             dist = os.path.realpath('asio')
@@ -22,7 +22,7 @@ def build_asio(parms):
             os.rename(d, dist)
 
 def build_mbedtls(parms):
-    print "**************** MBEDTLS"
+    print("**************** MBEDTLS")
     with Cd(build_dir(parms)) as cd:
         with ModEnv('PATH', "%s\\bin;%s" % (parms.get('GIT'), os.environ['PATH'])):
             dist = os.path.realpath('mbedtls')
@@ -57,7 +57,7 @@ def build_mbedtls(parms):
             vc_cmd(parms, r"lib /OUT:mbedtls.lib " + ' '.join(obj))
 
 def build_lz4(parms):
-    print "**************** LZ4"
+    print("**************** LZ4")
     with Cd(build_dir(parms)) as cd:
         with ModEnv('PATH', "%s\\bin;%s" % (parms.get('GIT'), os.environ['PATH'])):
             dist = os.path.realpath('lz4')
@@ -70,7 +70,7 @@ def build_lz4(parms):
 
 def build_jsoncpp(parms):
     if 'jsoncpp' in parms['LIB_VERSIONS']:
-        print "**************** JSONCPP"
+        print("**************** JSONCPP")
         with Cd(build_dir(parms)) as cd:
             with ModEnv('PATH', "%s\\bin;%s" % (parms.get('GIT'), os.environ['PATH'])):
                 dist = os.path.realpath('jsoncpp')
