@@ -220,7 +220,7 @@ def vc_cmd(parms, cmd, arch=None, succeed=0):
         arch = parms['ARCH']
     if arch == "x64":
         arch = "amd64"
-    with ModEnv('PATH', "%s;%s\\VC" % (os.environ['PATH'], parms['MSVC_DIR'])):
+    with ModEnv('PATH', "%s;%s\\VC;%s\\VC\\Auxiliary\\Build" % (os.environ['PATH'], parms['MSVC_DIR'], parms['MSVC_DIR'])):
         status = call('vcvarsall.bat %s && %s' % (arch, cmd), shell=True, succeed=succeed)
 
 def vc_parms(parms, cmd_dict):
